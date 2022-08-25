@@ -75,7 +75,7 @@ public class frmLoginVIEW extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(97, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -83,7 +83,7 @@ public class frmLoginVIEW extends javax.swing.JFrame {
                     .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
                     .addComponent(btEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(98, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -116,33 +116,7 @@ public class frmLoginVIEW extends javax.swing.JFrame {
 
     private void btEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEntrarActionPerformed
 
-
-        try{
-
-            String usuario = txtUsuario.getText();
-            int password = Integer.parseInt(txtSenha.getText());
-            UsuarioDTO usu_dto = new UsuarioDTO();
-            usu_dto.setUsuario(usuario);
-            usu_dto.setPassword(password);
-            
-            UsuarioDAO usu_dao = new UsuarioDAO(); 
-            ResultSet resul = usu_dao.autenticacao(usu_dto);
-            
-            if(resul.next()){
-                // chamar proxima tela
-                frmCadastroVIEW objFrmCadastro = new frmCadastroVIEW();
-                objFrmCadastro.setVisible(true);
-                
-                dispose();
-            }else{
-                // mensagem de incorreto
-                JOptionPane.showMessageDialog(null, "Usuario ou senha incorreto! ");
-            }
-            
-        } catch (SQLException erro){
-            JOptionPane.showMessageDialog(null, "Erro frmVIEW " + erro.getMessage());
-            
-        }
+        login();
 
     }//GEN-LAST:event_btEntrarActionPerformed
 
@@ -196,4 +170,39 @@ public class frmLoginVIEW extends javax.swing.JFrame {
     private javax.swing.JTextField txtSenha;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
+
+
+    public void login(){
+        
+        try{
+
+            String usuario = txtUsuario.getText();
+            String password = txtSenha.getText();
+            UsuarioDTO usu_dto = new UsuarioDTO();
+            usu_dto.setUsuario(usuario);
+            usu_dto.setPassword(password);
+            
+            UsuarioDAO usu_dao = new UsuarioDAO(); 
+            ResultSet resul = usu_dao.autenticacao(usu_dto);
+            
+            if(resul.next()){
+                // chamar proxima tela
+                frmCadastroVIEW objFrmCadastro = new frmCadastroVIEW();
+                objFrmCadastro.setVisible(true);
+                
+                dispose();
+            }else{
+                // mensagem de incorreto
+                JOptionPane.showMessageDialog(null, "Usuario ou senha incorreto! ");
+            }
+            
+        } catch (SQLException erro){
+            JOptionPane.showMessageDialog(null, "Erro frmVIEW " + erro.getMessage());
+            
+        }
+    }
+    
+    
+    
 }
+

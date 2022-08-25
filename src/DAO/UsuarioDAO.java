@@ -27,7 +27,7 @@ public class UsuarioDAO {
                     + "where usuario = ? and senha = ?";
             PreparedStatement pst = objConn.prepareStatement(sql);
             pst.setString(1, objUsuario.getUsuario());
-            pst.setInt(2, objUsuario.getPassword());
+            pst.setString(2, objUsuario.getPassword());
             
             ResultSet resul = pst.executeQuery();
             return resul;
