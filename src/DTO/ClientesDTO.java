@@ -18,6 +18,13 @@ public class ClientesDTO {
     private long numCell;
     
     // Métodos especiais
+    public ClientesDTO(String nome, long cpf, long numCell){
+        this.nome = nome;
+        this.cpf = cpf;
+        this.numCell = numCell;
+        
+        
+    }
 
     public int getIdClient() {
         return idClient;

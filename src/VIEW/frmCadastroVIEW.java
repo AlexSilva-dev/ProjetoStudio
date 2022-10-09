@@ -4,8 +4,11 @@
  */
 package VIEW;
 
+import DAO.ClienteDAO;
+import DTO.ClientesDTO;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
+import java.sql.ResultSet;
 
 /**
  *
@@ -195,15 +198,28 @@ public class frmCadastroVIEW extends javax.swing.JFrame {
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         // TODO add your handling code here:
         // Pegando a data e formatando
-        SimpleDateFormat objSimpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        String dataFormatada = objSimpleDateFormat.format(cldData.getDate());
-        JOptionPane.showMessageDialog(null, "data: " + dataFormatada);
+        if( cldData.getDate() != null){
+            SimpleDateFormat objSimpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            String dataFormatada = objSimpleDateFormat.format(cldData.getDate());
+            JOptionPane.showMessageDialog(null, "data: " + dataFormatada);
+        }
         //
         String nome = txtNome.getText();
         long cpf = Long.parseLong(txtCPF.getText());
         long numCell = Long.parseLong(txtNumCell.getText());
         
         
+        ClientesDTO objClienteDTO = new ClientesDTO(nome, cpf, numCell);
+        try{
+            ClienteDAO objCleinteDAO = new ClienteDAO();
+            objCleinteDAO.inserir(objClienteDTO);
+            txtNome.setText("");
+            txtCPF.setText("");
+            txtNumCell.setText("");
+        } catch(Exception erro){
+           
+            JOptionPane.showMessageDialog(null, "fmrCadastroView: " + erro);
+        }
         
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
