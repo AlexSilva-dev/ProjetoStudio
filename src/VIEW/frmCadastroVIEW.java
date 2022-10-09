@@ -94,7 +94,7 @@ public class frmCadastroVIEW extends javax.swing.JFrame {
 
         txtNumCell.setFont(new java.awt.Font("Courier 10 Pitch", 0, 18)); // NOI18N
         txtNumCell.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        txtNumCell.setNextFocusableComponent(btnCadastrar);
+        txtNumCell.setNextFocusableComponent(cldData);
         txtNumCell.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNumCellActionPerformed(evt);
@@ -194,9 +194,17 @@ public class frmCadastroVIEW extends javax.swing.JFrame {
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         // TODO add your handling code here:
+        // Pegando a data e formatando
         SimpleDateFormat objSimpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String dataFormatada = objSimpleDateFormat.format(cldData.getDate());
         JOptionPane.showMessageDialog(null, "data: " + dataFormatada);
+        //
+        String nome = txtNome.getText();
+        long cpf = Long.parseLong(txtCPF.getText());
+        long numCell = Long.parseLong(txtNumCell.getText());
+        
+        
+        
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     /**
@@ -232,7 +240,7 @@ public class frmCadastroVIEW extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(frmCadastroVIEW.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+            
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

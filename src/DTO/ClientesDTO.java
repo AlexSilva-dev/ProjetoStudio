@@ -14,10 +14,42 @@ public class ClientesDTO {
     // Atributos
     private int idClient;
     private String nome;
-    private int cpf;
-    private int numCell;
+    private long cpf;
+    private long numCell;
     
     // Métodos especiais
+
+    public int getIdClient() {
+        return idClient;
+    }
+
+    public void setIdClient(int idClient) {
+        this.idClient = idClient;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public long getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(long cpf) {
+        this.cpf = cpf;
+    }
+
+    public long getNumCell() {
+        return numCell;
+    }
+
+    public void setNumCell(long numCell) {
+        this.numCell = numCell;
+    }
     
   
 }

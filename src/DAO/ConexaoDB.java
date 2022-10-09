@@ -20,7 +20,7 @@ public class ConexaoDB {
    
 
     public Connection conectarDB() {
-        String url = "jdbc:mysql://localhost:3306/ProjStudioDB";
+        String url = "jdbc:mysql://localhost:9000/ProjStudioDB";
         String user = "root";
         String senha = "12345678";
         Connection objConn = null;
