@@ -17,4 +17,5 @@ AtributoServicos idServico, nomeServico, tempoGasto(em hrs)
 
 # Relatório:
 - Tela de cadastro está parcialmente pronta, ela cadastra e adiciona no banco de dados, porém falta ver o que irei fazer com a data e o horário que o cliente vai marca
-- Também não tratei os casos de tentarem cadastrar um cliente com número de telefone impossiveis de existir e CPFs também. (acredito que basta add "if(cpf<100000000000)")
+- Tenho que mudar cpf e numCell para String
+- Criar uma class abstrata pessoaDTO, para reaproveitar código e está de acordo com POO
