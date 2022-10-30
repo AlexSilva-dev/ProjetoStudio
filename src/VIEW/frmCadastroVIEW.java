@@ -5,7 +5,7 @@
 package VIEW;
 
 import DAO.ClienteDAO;
-import DTO.ClientesDTO;
+import DTO.ClienteDTO;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import java.sql.ResultSet;
@@ -53,6 +53,11 @@ public class frmCadastroVIEW extends javax.swing.JFrame {
         jLabel1.setText("Tela de cadastro de clientes");
 
         btnTelaVerClientes.setText("Ver clientes cadastrados");
+        btnTelaVerClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTelaVerClientesActionPerformed(evt);
+            }
+        });
 
         btnTelaCadastrarUsuarios.setForeground(new java.awt.Color(0, 0, 255));
         btnTelaCadastrarUsuarios.setText("Cadastrar usuarios");
@@ -205,11 +210,11 @@ public class frmCadastroVIEW extends javax.swing.JFrame {
         }
         //
         String nome = txtNome.getText();
-        long cpf = Long.parseLong(txtCPF.getText());
-        long numCell = Long.parseLong(txtNumCell.getText());
+        String cpf = txtCPF.getText();
+        String numCell =txtNumCell.getText();
         
         
-        ClientesDTO objClienteDTO = new ClientesDTO(nome, cpf, numCell);
+        ClienteDTO objClienteDTO = new ClienteDTO(nome, cpf, numCell);
         try{
             ClienteDAO objCleinteDAO = new ClienteDAO();
             objCleinteDAO.inserir(objClienteDTO);
@@ -222,6 +227,10 @@ public class frmCadastroVIEW extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_btnCadastrarActionPerformed
+
+    private void btnTelaVerClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTelaVerClientesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnTelaVerClientesActionPerformed
 
     /**
      * @param args the command line arguments
