@@ -216,11 +216,13 @@ public class frmCadastroVIEW extends javax.swing.JFrame {
         
         ClienteDTO objClienteDTO = new ClienteDTO(nome, cpf, numCell);
         try{
+            
             ClienteDAO objCleinteDAO = new ClienteDAO();
             objCleinteDAO.inserir(objClienteDTO);
             txtNome.setText("");
             txtCPF.setText("");
             txtNumCell.setText("");
+            
         } catch(Exception erro){
            
             JOptionPane.showMessageDialog(null, "fmrCadastroView: " + erro);
@@ -230,6 +232,8 @@ public class frmCadastroVIEW extends javax.swing.JFrame {
 
     private void btnTelaVerClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTelaVerClientesActionPerformed
         // TODO add your handling code here:
+        frmConsultaVIEW objFrmConsultaVIEW = new frmConsultaVIEW();
+        objFrmConsultaVIEW.setVisible(true);
     }//GEN-LAST:event_btnTelaVerClientesActionPerformed
 
     /**
@@ -289,3 +293,4 @@ public class frmCadastroVIEW extends javax.swing.JFrame {
     private javax.swing.JTextField txtNumCell;
     // End of variables declaration//GEN-END:variables
 }
+

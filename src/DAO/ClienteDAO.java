@@ -24,6 +24,7 @@ public class ClienteDAO {
     // Métodos
     public void inserir(ClienteDTO objClientDTO){
         
+        result = null;
         objConnection = new ConexaoDB().conectarDB();
         String sql = "insert into cliente "
                     + "(idCliente, nome, cpf, numCell)"
@@ -52,6 +53,7 @@ public class ClienteDAO {
     
     public ArrayList<ClienteDTO> listar(){
         
+        result = null;
         String sql = "select * from cliente";
         ArrayList<ClienteDTO> arrayClienteDTO = new ArrayList<>();
         
@@ -60,23 +62,83 @@ public class ClienteDAO {
             objConnection = new ConexaoDB().conectarDB();
             objPreparedSta = objConnection.prepareStatement(sql);
             result = objPreparedSta.executeQuery();
-            
-            while(result.next()){
-                ClienteDTO objNewClienteDTO = new ClienteDTO();
-                objNewClienteDTO.setIdClient(result.getInt("idCliente"));
-                objNewClienteDTO.setNome(result.getString("nome"));
-                objNewClienteDTO.setCpf(result.getString("cpf"));
-                objNewClienteDTO.setNumCell(result.getString("numCell"));
-                
-                arrayClienteDTO.add(objNewClienteDTO);
-                
-            }
+            arrayClienteDTO = criarListaCliente(result);
             
         } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "ClienteDAO: " + erro);
             
         }
         return arrayClienteDTO;
+    }
+    
+    public ArrayList<ClienteDTO> pesquisar(ClienteDTO objClienteConsult){
+        
+        result = null;
+        String sql = "select * from cliente where ";
+        
+        try
+        {
+            objConnection = new ConexaoDB().conectarDB();
+            
+            if(objClienteConsult.getIdClient() != null){
+                sql += "idCliente = ?";
+                objPreparedSta = objConnection.prepareStatement(sql);
+                objPreparedSta.setInt(1, objClienteConsult.getIdClient());
+                
+                
+            } else if(objClienteConsult.getNome() != null){
+                
+                sql += "nome = ?";
+                objPreparedSta = objConnection.prepareStatement(sql);
+                objPreparedSta.setString(1, objClienteConsult.getNome());
+               
+                
+            } else if(objClienteConsult.getCpf() != null){
+                sql += "cpf = ?";
+                objPreparedSta = objConnection.prepareStatement(sql);
+                objPreparedSta.setInt(1, objClienteConsult.getIdClient());
+                
+            }
+            
+            result = objPreparedSta.executeQuery();
+            ArrayList<ClienteDTO> arrayClienteDTO = new ArrayList<>();
+            arrayClienteDTO = criarListaCliente(result);
+            return arrayClienteDTO;
+            
+        } catch (SQLException erro)
+        {
+            JOptionPane.showMessageDialog(null, "ClienteDAO: " + erro);
+            return null;
+        }
+        
+        
+                
+    }
+    
+    private ArrayList<ClienteDTO> criarListaCliente(ResultSet objResult){
+        
+        ArrayList<ClienteDTO> arrayClienteDTO = new ArrayList<>();
+        try
+        {
+            while(objResult.next()){
+                ClienteDTO objNewClienteDTO = new ClienteDTO();
+                objNewClienteDTO.setIdClient(objResult.getInt("idCliente"));
+                objNewClienteDTO.setNome(objResult.getString("nome"));
+                objNewClienteDTO.setCpf(objResult.getString("cpf"));
+                objNewClienteDTO.setNumCell(objResult.getString("numCell"));
+                
+                arrayClienteDTO.add(objNewClienteDTO);
+                
+            }
+        } catch (SQLException erro)
+        {
+            
+            JOptionPane.showMessageDialog(null, "ClienteDAO.criarListaCliente: " + erro);
+            return null;
+        }
+        
+        return arrayClienteDTO;
+        
     }
     
 }

@@ -8,6 +8,7 @@ import DAO.ClienteDAO;
 import DTO.ClienteDTO;
 import java.awt.Component;
 import java.util.ArrayList;
+import java.util.Comparator;
 import javax.swing.DefaultListSelectionModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -43,12 +44,16 @@ public class frmConsultaVIEW extends javax.swing.JFrame {
         buttonGroup4 = new javax.swing.ButtonGroup();
         buttonGroup5 = new javax.swing.ButtonGroup();
         buttonGroup6 = new javax.swing.ButtonGroup();
+        jSplitPane1 = new javax.swing.JSplitPane();
         jLabel1 = new javax.swing.JLabel();
         cbOrdenar = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
-        btnOrdenar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbConsulta = new javax.swing.JTable();
+        jLabel3 = new javax.swing.JLabel();
+        cbTipoPesquisa = new javax.swing.JComboBox<>();
+        txtPesquisa = new javax.swing.JTextField();
+        btnPesquisarOrdenar = new javax.swing.JButton();
 
         jMenu1.setText("jMenu1");
 
@@ -61,17 +66,12 @@ public class frmConsultaVIEW extends javax.swing.JFrame {
         jLabel1.setText("Tela de consulta");
         jLabel1.setToolTipText("");
 
-        cbOrdenar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Horario", "Nome" }));
+        cbOrdenar.setFont(new java.awt.Font("Noto Sans CJK KR", 0, 18)); // NOI18N
+        cbOrdenar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Horário", "Nome", "ID" }));
         cbOrdenar.setToolTipText("");
 
-        jLabel2.setText("Ordenar por:");
-
-        btnOrdenar.setText("Ordenar");
-        btnOrdenar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOrdenarActionPerformed(evt);
-            }
-        });
+        jLabel2.setFont(new java.awt.Font("Noto Sans CJK KR", 0, 18)); // NOI18N
+        jLabel2.setText("Ordenar por");
 
         tbConsulta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -91,50 +91,95 @@ public class frmConsultaVIEW extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tbConsulta);
 
+        jLabel3.setFont(new java.awt.Font("Noto Sans CJK KR", 0, 18)); // NOI18N
+        jLabel3.setText("Pesquisar por ");
+
+        cbTipoPesquisa.setFont(new java.awt.Font("Noto Sans CJK KR", 0, 18)); // NOI18N
+        cbTipoPesquisa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nome", "ID", "CPF" }));
+        cbTipoPesquisa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbTipoPesquisaActionPerformed(evt);
+            }
+        });
+
+        txtPesquisa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPesquisaActionPerformed(evt);
+            }
+        });
+
+        btnPesquisarOrdenar.setFont(new java.awt.Font("Noto Sans CJK KR", 0, 18)); // NOI18N
+        btnPesquisarOrdenar.setText("Pesquisar");
+        btnPesquisarOrdenar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisarOrdenarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(171, 171, 171)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(113, 113, 113)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(142, 142, 142))))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
+                        .addGap(126, 126, 126)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbOrdenar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnOrdenar)))
+                        .addComponent(cbOrdenar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38)
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(cbTipoPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(288, 288, 288)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(378, Short.MAX_VALUE))
+                        .addGap(321, 321, 321)
+                        .addComponent(btnPesquisarOrdenar)))
+                .addContainerGap(119, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(jLabel1)
-                .addGap(56, 56, 56)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(cbOrdenar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(36, 36, 36)
-                .addComponent(btnOrdenar)
-                .addGap(33, 33, 33)
+                .addComponent(jLabel1)
+                .addGap(65, 65, 65)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbOrdenar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(cbTipoPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addComponent(txtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnPesquisarOrdenar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnOrdenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrdenarActionPerformed
+    private void cbTipoPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoPesquisaActionPerformed
         // TODO add your handling code here:
-        listar();
-    }//GEN-LAST:event_btnOrdenarActionPerformed
+    }//GEN-LAST:event_cbTipoPesquisaActionPerformed
+
+    private void txtPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesquisaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPesquisaActionPerformed
+
+    private void btnPesquisarOrdenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarOrdenarActionPerformed
+        // TODO add your handling code here:
+        pesquisar();
+    }//GEN-LAST:event_btnPesquisarOrdenarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -179,7 +224,7 @@ public class frmConsultaVIEW extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnOrdenar;
+    private javax.swing.JButton btnPesquisarOrdenar;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
@@ -187,42 +232,105 @@ public class frmConsultaVIEW extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup5;
     private javax.swing.ButtonGroup buttonGroup6;
     private javax.swing.JComboBox<String> cbOrdenar;
+    private javax.swing.JComboBox<String> cbTipoPesquisa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JTable tbConsulta;
+    private javax.swing.JTextField txtPesquisa;
     // End of variables declaration//GEN-END:variables
 
-
-    private void listar(){
+    private void listar() {
         ArrayList<ClienteDTO> arrayClienteDTO = new ArrayList<>();
-        
+
         try
         {
             ClienteDAO objClienteDAO = new ClienteDAO();
             arrayClienteDTO = objClienteDAO.listar();
-            DefaultTableModel model = (DefaultTableModel) tbConsulta.getModel();
-            model.setNumRows(0);
-            
-            for(int i=0; i<arrayClienteDTO.size(); i++){
-                System.out.println(arrayClienteDTO.get(i).toString());
-                
-                model.addRow(new Object[]{
-                        arrayClienteDTO.get(i).getIdClient(),
-                        arrayClienteDTO.get(i).getNome(),
-                        arrayClienteDTO.get(i).getNumCell(),
-                        arrayClienteDTO.get(i).getCpf()
-                        });
-                
-            }
-            
-            
+            arrayClienteDTO = ordenarArrayClientesDTO(arrayClienteDTO);
+            addItemTabela(arrayClienteDTO);
         } catch (Exception e)
         {
             JOptionPane.showMessageDialog(null, "frmConsultaVIEW: " + e);
         }
+
     }
-    
+
+    private void pesquisar() {
+        String pesquisa = txtPesquisa.getText();
+        if(pesquisa == null || pesquisa.equals("")){
+            listar();
+            return;
+        }
+        String tipoConsul = cbTipoPesquisa.getSelectedItem() + "";
+        ClienteDTO objClienteDTO = new ClienteDTO();
+        ClienteDAO objClienteDAO = new ClienteDAO();
+        ArrayList<ClienteDTO> arrayClienteDTO = new ArrayList<>();
+
+        try
+        {
+
+            if (tipoConsul.equals("Nome"))
+            {
+                objClienteDTO.setNome(pesquisa);
+
+            } else if (tipoConsul.equals("ID"))
+            {
+                objClienteDTO.setIdClient(Integer.parseInt(pesquisa));
+            } else if (tipoConsul.equals("CPF"))
+            {
+                objClienteDTO.setCpf(pesquisa);
+            }
+            arrayClienteDTO = objClienteDAO.pesquisar(objClienteDTO);
+            arrayClienteDTO = ordenarArrayClientesDTO(arrayClienteDTO);
+            addItemTabela(arrayClienteDTO);
+
+        } catch (Exception e)
+        {
+            JOptionPane.showMessageDialog(null, "frmConsultaVIEW: " + e);
+        }
+
+    }
+
+    private ArrayList<ClienteDTO> ordenarArrayClientesDTO(ArrayList<ClienteDTO> arrayForSort) {
+
+        String tipoOrdem = cbOrdenar.getSelectedItem() + "";
+        //System.out.println(tipoOrdem);
+
+        if ("Nome".equals(tipoOrdem))
+        {
+            arrayForSort.sort(Comparator.comparing(ClienteDTO::getNome));
+        } else if (tipoOrdem.equals("ID"))
+        {
+            arrayForSort.sort(Comparator.comparing(ClienteDTO::getIdClient));
+        }
+
+        return arrayForSort;
+
+    }
+
+    private void addItemTabela(ArrayList<ClienteDTO> arrayClienteDTO) {
+
+        DefaultTableModel model = (DefaultTableModel) tbConsulta.getModel();
+        model.setNumRows(0);
+
+        for (int i = 0; i < arrayClienteDTO.size(); i++)
+        {
+            //System.out.println(arrayClienteDTO.get(i).toString());
+
+            model.addRow(new Object[]
+            {
+                arrayClienteDTO.get(i).getIdClient(),
+                arrayClienteDTO.get(i).getNome(),
+                arrayClienteDTO.get(i).getNumCell(),
+                arrayClienteDTO.get(i).getCpf()
+            });
+
+        }
+    }
+
 }

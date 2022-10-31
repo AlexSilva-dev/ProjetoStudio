@@ -10,8 +10,8 @@ package DTO;
  */
 public abstract class PessoaDTO {
     //Atributos
-    private String nome;
-    private String cpf;
+    private String nome = null;
+    private String cpf = null;
     
     // Métodos
 

@@ -200,6 +200,7 @@ public class frmLoginVIEW extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Erro frmVIEW " + erro.getMessage());
             
         }
+        
     }
     
     

@@ -8,8 +8,8 @@ package DTO;
 public class ClienteDTO extends PessoaDTO{
 
     // Atributos
-    private int idClient;
-    private String numCell;
+    private Integer idClient;
+    private String numCell = null;
 
     // Métodos especiais
     public ClienteDTO(String nome, String cpf, String numCell) {
@@ -33,11 +33,11 @@ public class ClienteDTO extends PessoaDTO{
         return status;
     }
 
-    public int getIdClient() {
+    public Integer getIdClient() {
         return idClient;
     }
 
-    public void setIdClient(int idClient) {
+    public void setIdClient(Integer idClient) {
         this.idClient = idClient;
     }
 
